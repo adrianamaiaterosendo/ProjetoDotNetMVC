@@ -1,0 +1,19 @@
+@model IEnumerable<TreinoMVC.Models.Contato>
+    
+    <h2>Todos os contatos</h2>
+    <a href="/Contatos/Cadastrar" class="btn btn-primary" type="submit">Novo Contato</a>
+    <a href="/Contatos/Categoria" class="btn btn-primary" type="submit">Categorias</a>
+   <hr>
+    
+   
+  @foreach (var contato in Model)
+{
+    <p>Nome: @contato.Nome</p>
+    <p>Categoria: @contato.Categoria.Nome</p>
+    <p>Email: @contato.Email</p>
+    <p>Telefone: @contato.Telefone</p>
+
+    <a href="/Contatos/EditarContato/@contato.Id" class="btn btn-success">Editar</a>
+    <a href="/Contatos/Deletar/@contato.Id" class="btn btn-danger">Deletar</a>
+    <hr>
+}

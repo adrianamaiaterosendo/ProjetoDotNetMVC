@@ -1,0 +1,24 @@
+@model TreinoMVC.DTO.ContatoDTO;
+
+<h2>Edição de Contato</h2>
+
+<form class = "form-horizontal" asp-controller="Contatos" asp-action="AtualizarContatos" method="POST">
+    <input type="hidden" asp-for="Id" >
+
+    <label asp-for="Nome">Nome</label><br>
+    <input type="text" class="form-control" asp-for="Nome" placeholder="Digite um nome"><br>
+   
+
+    <label asp-for="CategoriaID">Categoria</label>
+    <select class="form-control" asp-for="CategoriaID" asp-items='@(new SelectList(@ViewBag.Categorias,"Id", "Nome"))'></select><br>
+
+      <label asp-for="Email">E-mail</label><br>
+    <input type="text" class="form-control" asp-for="Email" placeholder="Digite um e-mail"><br>
+
+      <label asp-for="Telefone">Telefone</label><br>
+    <input type="text" class="form-control" asp-for="Telefone" placeholder="Digite um telefone"><br>
+
+    <button class="btn btn-success">Atualizar</button>
+
+</form><br>
+<a href="javascript:history.back();">Voltar</a>
