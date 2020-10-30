@@ -20,43 +20,28 @@ namespace TreinoMVC.Controllers
             this.database = database;
         }
 
-        // public IActionResult EditarCategoria (int id){
-        //     var categoria = database.Categorias.First(cat => cat.Id == id);
-        //     CategoriaDTO categoriaView = new CategoriaDTO();
-        //     categoriaView.Id = categoria.Id;
-        //     categoriaView.Nome = categoria.Nome;
-        //     return View (categoriaView);
-        // }
-
         [HttpPost]
         public IActionResult Salvar (CategoriaDTO categoriaTemporaria){
-            
-            if(ModelState.IsValid){
+                if(ModelState.IsValid){
                 Categoria categoria = new Categoria();
                 categoria.Nome = categoriaTemporaria.Nome;
                 database.Categorias.Add(categoria);
                 database.SaveChanges();
                 return RedirectToAction ("Categoria", "Contatos");
-            }else { return View ("../Contatos");}
-        }
+            } else { return View ("../Contatos");}}
+        
 
         public IActionResult Atualizar(CategoriaDTO categoriaTemporaria){
             if(ModelState.IsValid){
                 var categoria = database.Categorias.First(cat => cat.Id == categoriaTemporaria.Id);
                 categoria.Nome = categoriaTemporaria.Nome;
                 database.SaveChanges();
-                return RedirectToAction ("Categoria", "Contatos");
-
-            }
-            else { return View ("../Contatos/Categoria");}}
-
-            public IActionResult Deletar (int id){
+                return RedirectToAction ("Categoria", "Index");
+            }else { return RedirectToAction ("Categoria", "Index");}}
+                
+        public IActionResult Deletar (int id){
             ViewBag.Categorias = database.Categorias.ToList();
-            var categoria = database.Categorias.First(cat => cat.Id == id);
-            // CategoriaDTO categoriaView = new CategoriaDTO();
-            // categoriaView.Id = categoria.Id;
-            // categoriaView.Nome = categoria.Nome;
-            
+            var categoria = database.Categorias.First(cat => cat.Id == id);                   
             try {
                 database.Categorias.Remove(categoria);
                 database.SaveChanges();

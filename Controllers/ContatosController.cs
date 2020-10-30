@@ -42,9 +42,9 @@ namespace TreinoMVC.Controllers
 
 
         public IActionResult NovaCategoria (){
-          return View();
+            return View();
         }  
-          public IActionResult EditarCategoria (int id){
+        public IActionResult EditarCategoria (int id){
             var categoria = database.Categorias.First(cat => cat.Id == id);
             CategoriaDTO categoriaView = new CategoriaDTO();
             categoriaView.Id = categoria.Id;
@@ -53,12 +53,12 @@ namespace TreinoMVC.Controllers
         }
         public IActionResult Cadastrar(){
 
-         ViewBag.Categorias = database.Categorias.ToList();
-         return View();}
-
-         public IActionResult EditarContato(int id){
             ViewBag.Categorias = database.Categorias.ToList();
-           var contato = database.Contatos.Include(c => c.Categoria).First(con => con.Id == id);
+            return View();}
+
+        public IActionResult EditarContato(int id){
+            ViewBag.Categorias = database.Categorias.ToList();
+            var contato = database.Contatos.Include(c => c.Categoria).First(con => con.Id == id);
             ContatoDTO contatoView = new ContatoDTO();
             contatoView.Id = contato.Id;
             contatoView.Nome = contato.Nome;
@@ -67,7 +67,7 @@ namespace TreinoMVC.Controllers
             contatoView.Telefone = contato.Telefone;
             return View (contatoView);}
 
-            public IActionResult AtualizarContatos(ContatoDTO contatoTemporario){
+        public IActionResult AtualizarContatos(ContatoDTO contatoTemporario){
             if(ModelState.IsValid){
                 var contatos = database.Contatos.First(con => con.Id  == contatoTemporario.Id);
                 contatos.Nome = contatoTemporario.Nome;
@@ -86,12 +86,11 @@ namespace TreinoMVC.Controllers
         }
 
         public IActionResult Deletar (int id){
-         ViewBag.Categorias = database.Categorias.ToList();
-           var contato = database.Contatos.First(con => con.Id == id);
+            ViewBag.Categorias = database.Categorias.ToList();
+            var contato = database.Contatos.First(con => con.Id == id);
             ContatoDTO contatoView = new ContatoDTO();
             contatoView.Id = contato.Id;
             contatoView.Nome = contato.Nome;
-            //contatoView.CategoriaID = database.Categorias.First(categoria => categoria.Id);
             contatoView.Email = contato.Email;
             contatoView.Telefone = contato.Telefone;
             database.Contatos.Remove(contato);
